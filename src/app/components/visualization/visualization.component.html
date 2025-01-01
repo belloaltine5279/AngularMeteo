@@ -1,0 +1,43 @@
+<h1>Visualisation des données</h1>
+
+<h2>Liste des données</h2>
+<!--affichage des données data de la json sur le site -->
+
+<!--<ul>-->
+<!--  <li *ngFor="let item of data">{{ item }}</li>-->
+<!--</ul>-->
+
+
+<!-- visualization.component.html -->
+
+<div *ngIf="data.length > 0; else loading">
+  <h2>List of Universities</h2>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Country</th>
+      <th>Web Pages</th>
+      <th>Domains</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let university of data">
+      <td>{{ university.name }}</td>
+      <td>{{ university.country }}</td>
+      <td>
+        <a *ngFor="let webPage of university.web_pages" [href]="webPage" target="_blank">
+          {{ webPage }}
+        </a>
+      </td>
+      <td>{{ university.domains.join(', ') }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Template pour afficher pendant le chargement -->
+<ng-template #loading>
+  <p>Loading universities...</p>
+</ng-template>
